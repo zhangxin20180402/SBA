@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { FileService } from '../../service/file.service';
 import * as $ from 'jquery';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-import-excel',
@@ -12,9 +13,13 @@ export class ImportExcelComponent implements OnInit {
 
   uploadedFiles: Array<File>;
 
+  currentFile: File;
+
   fileName = "";
 
-  constructor(private http: HttpClient) { }
+  msg = "";
+
+  constructor(private fileService: FileService) { }
 
   ngOnInit() {
   }
@@ -24,19 +29,20 @@ export class ImportExcelComponent implements OnInit {
     this.fileName = this.uploadedFiles[0].name;
   }
 
-  selectFile(){
+  selectFile() {
     $("#file").trigger('click');
   }
 
   upload() {
-    let formData = new FormData();
-    for (var i = 0; i < this.uploadedFiles.length; i++) {
-      formData.append("uploads[]", this.uploadedFiles[i], this.uploadedFiles[i].name);
-    }
-    this.http.post('/api/upload', formData)
-      .subscribe((response) => {
-        console.log('response received is ', response);
-      })
+
+    this.currentFile = this.uploadedFiles[0];
+    this.fileService.uploadFile(this.currentFile).subscribe(response => {
+      //this.uploadedFiles.value = '';
+      if (response instanceof HttpResponse) {
+        //this.msg = response.body;
+        console.log(response.body);
+      }
+    });
   }
 
 }
