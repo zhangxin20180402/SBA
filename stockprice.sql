@@ -15,4 +15,14 @@ CREATE TABLE stockprice(
   primary key(id)
 );
 
+DROP TABLE IF EXISTS user;
+
+CREATE TABLE user(
+  id bigint auto_increment,
+  username VARCHAR(512) NOT NULL,
+  password VARCHAR(512) NOT NULL,
+  primary key(id)
+);
+
+
 

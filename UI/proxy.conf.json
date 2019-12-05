@@ -1,5 +1,8 @@
 {
     "/api/*": {
         "target": "http://localhost:2001/", "secure": false
+    },
+    "/user/*": {
+        "target": "http://localhost:2002/", "secure": false
     }
 }

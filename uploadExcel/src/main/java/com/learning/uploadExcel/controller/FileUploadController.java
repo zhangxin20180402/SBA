@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.learning.uploadExcel.entity.StockPriceEntity;
+import com.learning.uploadExcel.model.UploadSummary;
 import com.learning.uploadExcel.service.IStockService;
 
 @RestController
@@ -32,7 +33,7 @@ public class FileUploadController {
 	
 	private static final Logger logger = Logger.getLogger(FileUploadController.class.getName());
 	@PostMapping("/api/upload")
-	public ResponseEntity<String> uploadData(@RequestParam("file") MultipartFile file) throws Exception {
+	public ResponseEntity<UploadSummary> uploadData(@RequestParam("file") MultipartFile file) throws Exception {
 		if (file == null) {
 			throw new RuntimeException("You must select the a file for uploading");
 		}
@@ -46,6 +47,11 @@ public class FileUploadController {
 		logger.info("name: " + name);
 		logger.info("contentType: " + contentType);
 		logger.info("size: " + size);
+		
+		UploadSummary uploadSummary = new UploadSummary();
+		
+		java.sql.Date fromDate;
+		java.sql.Date toDate;
 		
 		List<StockPriceEntity> stockPrices = new LinkedList<StockPriceEntity>();
 		StockPriceEntity stockPrice;
@@ -70,6 +76,17 @@ public class FileUploadController {
             	stockPrice.setCurrentDate(new java.sql.Date(df.parse(stockPriceInfo[3]).getTime()));
             	stockPrice.setCurrentTime(java.sql.Time.valueOf(stockPriceInfo[4]));
             	
+            	uploadSummary.setCompanyName(stockPrice.getCompanyCode());
+            	uploadSummary.setStockExchange(stockPrice.getStockExchange());
+            	uploadSummary.setNumberOfRecords(uploadSummary.getNumberOfRecords() + 1);
+            	if(uploadSummary.getFromDate() == null || uploadSummary.getFromDate().getTime() > stockPrice.getCurrentDate().getTime()) {
+            		uploadSummary.setFromDate(stockPrice.getCurrentDate());
+            	}
+            	
+            	if(uploadSummary.getToDate() == null || uploadSummary.getToDate().getTime() < stockPrice.getCurrentDate().getTime()) {
+            		uploadSummary.setToDate(stockPrice.getCurrentDate());
+            	}
+            	
             	stockPrices.add(stockPrice);
             	
             	System.out.println(stockPriceLine);
@@ -84,7 +101,7 @@ public class FileUploadController {
     	stockService.saveStockPrice(stockPrices);
 
 		// Do processing with uploaded file data in Service layer
-		return new ResponseEntity<String>(originalName, HttpStatus.OK);
+		return new ResponseEntity<UploadSummary>(uploadSummary, HttpStatus.OK);
 	}
 
 }

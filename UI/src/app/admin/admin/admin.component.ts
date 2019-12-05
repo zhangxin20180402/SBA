@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../service/authentication.service';
 
 @Component({
   selector: 'admin',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,
+    private loginservice: AuthenticationService) { }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.loginservice.logOut();
+    this.router.navigate(['sign-in'])
   }
 
 }

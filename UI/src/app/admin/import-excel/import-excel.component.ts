@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
 
 import { FileService } from '../../service/file.service';
 import * as $ from 'jquery';
@@ -19,7 +20,7 @@ export class ImportExcelComponent implements OnInit {
 
   msg = "";
 
-  constructor(private fileService: FileService) { }
+  constructor(private fileService: FileService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -37,10 +38,9 @@ export class ImportExcelComponent implements OnInit {
 
     this.currentFile = this.uploadedFiles[0];
     this.fileService.uploadFile(this.currentFile).subscribe(response => {
-      //this.uploadedFiles.value = '';
       if (response instanceof HttpResponse) {
-        //this.msg = response.body;
         console.log(response.body);
+        this.router.navigate(['admin/uploadSummary'], { state: response.body })
       }
     });
   }

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule} from './app.routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -10,13 +10,16 @@ import { SignUpComponent } from './common/sign-up/sign-up.component';
 import { UserComponent } from './user/user/user.component';
 
 import { AdminModule} from './admin/admin.module';
+import { JWTInterceptorService} from './service/jwtinterceptor.service';
+import { UploadSummaryComponent } from './admin/upload-summary/upload-summary.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    UserComponent
+    UserComponent,
+    UploadSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,9 @@ import { AdminModule} from './admin/admin.module';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [  {  
+    provide:HTTP_INTERCEPTORS, useClass:JWTInterceptorService, multi:true 
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

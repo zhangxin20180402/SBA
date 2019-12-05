@@ -1,1 +1,41 @@
-<p>manage-companies works!</p>
+<div class="mainContainer">
+    <div class="content">
+        <div class="header">
+            <h1>List of Companies</h1>
+        </div>
+        <div class="row margin25">
+
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-6">
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>S.no</th>
+                            <th>Title</th>
+                            <th>URL</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let playerItem of playerItems">
+                            <td>{{ playerItem.id }}</td>
+                            <td>{{ playerItem.title }}</td>
+                            <td><button class="btn btn-primary" (click)="onEdit(playerItem)">Edit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="btn btn-success" (click)="newCompany()">New Company</button>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+
+        </div>
+    </div>
+</div>
