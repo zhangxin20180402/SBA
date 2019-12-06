@@ -12,6 +12,18 @@ import { UserComponent } from './user/user/user.component';
 import { AdminModule} from './admin/admin.module';
 import { JWTInterceptorService} from './service/jwtinterceptor.service';
 
+// Import angular-fusioncharts
+import { FusionChartsModule } from "angular-fusioncharts";
+
+// Import FusionCharts library and chart modules
+import * as FusionCharts from "fusioncharts";
+import * as Charts from "fusioncharts/fusioncharts.charts";
+
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+
+// Pass the fusioncharts library and chart modules
+FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +37,8 @@ import { JWTInterceptorService} from './service/jwtinterceptor.service';
     AdminModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FusionChartsModule
   ],
   providers: [  {  
     provide:HTTP_INTERCEPTORS, useClass:JWTInterceptorService, multi:true 
