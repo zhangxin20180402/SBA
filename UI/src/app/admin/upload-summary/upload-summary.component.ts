@@ -15,14 +15,15 @@ export class UploadSummaryComponent implements OnInit {
   toDate="";
 
   constructor(private router: Router) { 
-
-    const state = JSON.parse(this.router.getCurrentNavigation().extras.state);
+    
+    const state = this.router.getCurrentNavigation().extras.state;
 
     this.companyName = state.companyName
     this.stockExchange = state.stockExchange
     this.nrOfRecords = state.numberOfRecords
     this.fromDate = state.fromDate
     this.toDate = state.toDate
+
 
   }
 

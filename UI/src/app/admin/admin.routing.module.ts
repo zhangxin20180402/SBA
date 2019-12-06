@@ -7,7 +7,10 @@ import { ManageCompaniesComponent } from './manage-companies/manage-companies.co
 import { ManageStockExchangeComponent } from './manage-stock-exchange/manage-stock-exchange.component';
 import { ManageIPOComponent } from './manage-ipo/manage-ipo.component';
 import { UploadSummaryComponent } from './upload-summary/upload-summary.component';
+import { CreateCompanyComponent } from './create-company/create-company.component';
 import { AuthGaurdService } from '../service/auth-gaurd.service'
+import { ComparisonChartsComponent } from './comparison-charts/comparison-charts.component';
+import { DisplayChartsComponent } from './display-charts/display-charts.component';
 
 const adminRoutes:Routes = [
     { path: 'admin', 
@@ -35,8 +38,23 @@ const adminRoutes:Routes = [
             canActivate:[AuthGaurdService]
         },
         {
+            path: 'comparisonCharts',
+            component: ComparisonChartsComponent,
+            canActivate:[AuthGaurdService]
+        },
+        {
+            path: 'displayCharts',
+            component: DisplayChartsComponent,
+            canActivate:[AuthGaurdService]
+        },
+        {
             path: 'ipo',
             component: ManageIPOComponent,
+            canActivate:[AuthGaurdService]
+        },
+        {
+            path: 'createcompany',
+            component: CreateCompanyComponent,
             canActivate:[AuthGaurdService]
         },
         {

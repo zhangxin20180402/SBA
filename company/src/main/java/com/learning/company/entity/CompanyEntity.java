@@ -8,10 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -35,20 +33,27 @@ public class CompanyEntity {
 	
 	@Column(name="boardofdirectors")
 	private String boardOfDirectors;
-	
-    @ManyToMany(targetEntity = StockExchangeEntity.class, cascade = CascadeType.ALL)
-    @JoinTable(name = "company_stockexchange",joinColumns =
-            @JoinColumn(name = "company_id",referencedColumnName = "id"),
-        inverseJoinColumns =
-            @JoinColumn(name = "stockexchange_id", referencedColumnName = "id")
-    )
-    private Set<StockExchangeEntity> stockExchangeSet;   
+
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private Set<CompanyStockExchange> companyStockExchanges;
     
 	@Column(name="sector")
 	private String sector;
     
 	@Column(name="briefwriteup")
 	private String briefwriteup;
+
+	public CompanyEntity() {
+		super();
+	}
+
+	public CompanyEntity(String name, String turnover, String ceo, String briefwriteup) {
+		super();
+		this.name = name;
+		this.turnover = turnover;
+		this.ceo = ceo;
+		this.briefwriteup = briefwriteup;
+	}
 
 	public Long getId() {
 		return id;
@@ -90,12 +95,12 @@ public class CompanyEntity {
 		this.boardOfDirectors = boardOfDirectors;
 	}
 
-	public Set<StockExchangeEntity> getStockExchangeSet() {
-		return stockExchangeSet;
+	public Set<CompanyStockExchange> getCompanyStockExchanges() {
+		return companyStockExchanges;
 	}
 
-	public void setStockExchangeSet(Set<StockExchangeEntity> stockExchangeSet) {
-		this.stockExchangeSet = stockExchangeSet;
+	public void setCompanyStockExchanges(Set<CompanyStockExchange> companyStockExchanges) {
+		this.companyStockExchanges = companyStockExchanges;
 	}
 
 	public String getSector() {

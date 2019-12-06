@@ -1,0 +1,76 @@
+<div class="mainContainer">
+    <div class="content">
+        <div class="header">
+            <h1>Comparison Charts</h1>
+        </div>
+        <div class="row margin25">
+
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Select Company/Sector</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select [(ngModel)]="selectedCategory">
+                            <option *ngFor="let category of categories" [value]="category"> {{ category }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Select Stock Exchange</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select [(ngModel)]="selectedStockExchange">
+                            <option *ngFor="let stockExchnage of stockExchanges" [value]="stockExchnage">
+                                {{ stockExchnage }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Company Name</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input [(ngModel)]="company" />
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <label>From Date</label>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+
+                    <div class="col-md-3">
+                        <label>To Date</label>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <label>Specify Periodicity</label>
+                    </div>
+                    <div class="col-md-9">
+                    </div>
+                </div>
+
+                <button class="btn btn-success" (click)="generateMap()">Generate Map</button>
+
+            </div>
+            <div class="col-md-4">
+
+            </div>
+
+        </div>
+    </div>
+</div>

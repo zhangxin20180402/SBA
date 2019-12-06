@@ -1,13 +1,15 @@
 package com.learning.company.entity;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -33,8 +35,8 @@ public class StockExchangeEntity {
 	@Column(name = "remark")
 	private String remark;
 	
-    @ManyToMany(mappedBy = "stockExchangeSet")
-    private Set<CompanyEntity> companySet;
+    @OneToMany(mappedBy = "stockexchange", cascade = CascadeType.ALL)
+    private Set<CompanyStockExchange> companyStockExchanges = new HashSet<>();
 
 	public Long getId() {
 		return id;
@@ -76,12 +78,12 @@ public class StockExchangeEntity {
 		this.remark = remark;
 	}
 
-	public Set<CompanyEntity> getCompanySet() {
-		return companySet;
+	public Set<CompanyStockExchange> getCompanyStockExchanges() {
+		return companyStockExchanges;
 	}
 
-	public void setCompanySet(Set<CompanyEntity> companySet) {
-		this.companySet = companySet;
+	public void setCompanyStockExchanges(Set<CompanyStockExchange> companyStockExchanges) {
+		this.companyStockExchanges = companyStockExchanges;
 	}
 
 }
