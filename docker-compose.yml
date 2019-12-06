@@ -1,0 +1,63 @@
+version: '2'
+
+services:
+
+  mysqldb:
+    image: mysql:latest
+    networks:
+      - stock-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=stock
+    ports:
+       - "3307:3306"
+    restart: always
+    expose:
+       - "3307"
+  uploadexcel:
+    build: ./uploadExcel
+    networks:
+      - stock-network
+    restart: always
+    ports:
+       - "2001:2001"
+    expose:
+       - "2001"
+    depends_on:
+      - mysqldb
+  infrasecurity:
+    build: ./infraSecurity
+    networks:
+      - stock-network
+    restart: always
+    ports:
+       - "2002:2002"
+    expose:
+       - "2002"
+    depends_on:
+      - mysqldb
+  company:
+    build: ./company
+    networks:
+      - stock-network
+    restart: always
+    ports:
+       - "2003:2003"
+    expose:
+       - "2003"
+    depends_on:
+      - mysqldb
+  stockexchange:
+    build: ./stockExchange
+    networks:
+      - stock-network
+    restart: always
+    ports:
+       - "2004:2004"
+    expose:
+       - "2004"
+    depends_on:
+      - mysqldb
+networks:
+  stock-network:
+    driver: bridge
