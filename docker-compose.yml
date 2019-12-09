@@ -2,6 +2,15 @@ version: '2'
 
 services:
 
+  eureka:
+    build: ./eureka
+    networks:
+      - stock-network
+    restart: always
+    ports:
+       - "7899:7899"
+    expose:
+       - "7899"
   mysqldb:
     build: ./mysql
     networks:
@@ -25,6 +34,7 @@ services:
        - "7895"
     depends_on:
       - mysqldb
+      - eureka
   infrasecurity:
     build: ./infraSecurity
     networks:
@@ -36,6 +46,7 @@ services:
        - "7896"
     depends_on:
       - mysqldb
+      - eureka
   company:
     build: ./company
     networks:
@@ -47,6 +58,7 @@ services:
        - "7897"
     depends_on:
       - mysqldb
+      - eureka
   stockexchange:
     build: ./stockExchange
     networks:
@@ -58,6 +70,7 @@ services:
        - "7898"
     depends_on:
       - mysqldb
+      - eureka
   angular:
     build: ./UI
     networks:

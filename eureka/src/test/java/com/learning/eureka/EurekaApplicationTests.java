@@ -1,9 +1,9 @@
-package com.learning.infraSecurity;
+package com.learning.eureka;
 
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class InfraSecurityApplicationTests {
+class EurekaApplicationTests {
 
 	void contextLoads() {
 	}

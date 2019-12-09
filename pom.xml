@@ -16,6 +16,7 @@
   	<module>infraSecurity</module>
   	<module>stockExchange</module>
   	<module>uploadExcel</module>
+  	<module>eureka</module>
   </modules>
   
 </project>
