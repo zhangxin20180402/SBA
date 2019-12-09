@@ -20,9 +20,9 @@ services:
       - stock-network
     restart: always
     ports:
-       - "2001:2001"
+       - "7895:7895"
     expose:
-       - "2001"
+       - "7895"
     depends_on:
       - mysqldb
   infrasecurity:
@@ -31,9 +31,9 @@ services:
       - stock-network
     restart: always
     ports:
-       - "2002:2002"
+       - "7896:7896"
     expose:
-       - "2002"
+       - "7896"
     depends_on:
       - mysqldb
   company:
@@ -42,9 +42,9 @@ services:
       - stock-network
     restart: always
     ports:
-       - "2003:2003"
+       - "7897:7897"
     expose:
-       - "2003"
+       - "7897"
     depends_on:
       - mysqldb
   stockexchange:
@@ -53,9 +53,9 @@ services:
       - stock-network
     restart: always
     ports:
-       - "2004:2004"
+       - "7898:7898"
     expose:
-       - "2004"
+       - "7898"
     depends_on:
       - mysqldb
   angular:
@@ -63,9 +63,9 @@ services:
     networks:
       - stock-network
     ports:
-       - "80:80"
+       - "7894:7894"
     expose:
-       - "80"
+       - "7894"
     links: 
       - uploadexcel
       - infrasecurity

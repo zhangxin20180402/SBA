@@ -8,5 +8,5 @@ COPY ./dist/UI/ /usr/share/nginx/html/
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 80
+EXPOSE 7894
 CMD ["nginx", "-g", "daemon off;"]

@@ -1,4 +1,4 @@
 docker -H 172.18.2.50:2375 ps 
 
 docker-compose -H 172.18.2.50:2375 down
-docker-compose -H 172.18.2.50:2375 up
+docker-compose -H 172.18.2.50:2375 up --build
