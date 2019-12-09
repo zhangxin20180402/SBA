@@ -3,7 +3,7 @@ version: '2'
 services:
 
   mysqldb:
-    image: mysql:latest
+    build: ./mysql
     networks:
       - stock-network
     environment:
@@ -58,6 +58,20 @@ services:
        - "2004"
     depends_on:
       - mysqldb
+  angular:
+    build: ./UI
+    networks:
+      - stock-network
+    ports:
+       - "80:80"
+    expose:
+       - "80"
+    links: 
+      - uploadexcel
+      - infrasecurity
+      - company
+      - stockexchange
+      
 networks:
   stock-network:
     driver: bridge
