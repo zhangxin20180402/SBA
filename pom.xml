@@ -17,6 +17,7 @@
   	<module>stockExchange</module>
   	<module>uploadExcel</module>
   	<module>eureka</module>
+  	<module>zuul</module>
   </modules>
   
 </project>

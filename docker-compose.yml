@@ -71,6 +71,17 @@ services:
     depends_on:
       - mysqldb
       - eureka
+  zuul:
+    build: ./zuul
+    networks:
+      - stock-network
+    restart: always
+    ports:
+       - "7901:7901"
+    expose:
+       - "7901"
+    depends_on:
+      - eureka
   angular:
     build: ./UI
     networks:

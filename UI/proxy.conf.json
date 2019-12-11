@@ -1,14 +1,14 @@
 {
     "/api/*": {
-        "target": "http://localhost:2001/", "secure": false
+        "target": "http://localhost:7901/", "secure": false
     },
     "/user/*": {
-        "target": "http://localhost:2002/", "secure": false
+        "target": "http://localhost:7901/", "secure": false
     },
     "/company/*": {
-        "target": "http://localhost:2003/", "secure": false
+        "target": "http://localhost:7901/", "secure": false
     },
     "/stockExchange/*": {
-        "target": "http://localhost:2004/", "secure": false
+        "target": "http://localhost:7901/", "secure": false
     }
 }
